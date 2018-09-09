@@ -28,7 +28,6 @@ class TasksPage extends Component {
 	render() {
 		return (
 			<div className="container">
-				This is the page to see all the tasks for knights!
 				{this.getKnightTaskTables()}
 			</div>
 		);

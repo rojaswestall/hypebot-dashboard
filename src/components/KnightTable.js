@@ -10,6 +10,12 @@ class KnightTable extends Component {
 	constructor(props) {
 		super(props);
 		this.displayTasks = this.displayTasks.bind(this);
+		this.sortByDate = this.sortByDate.bind(this);
+	}
+
+	sortByDate() {
+		// Use props to rearrange the data used to display the tasks by date
+		// When the header "Date" is clicked on
 	}
 
 	displayTasks() {
@@ -18,27 +24,27 @@ class KnightTable extends Component {
 		return (
 			<Fragment>
 				<tr>
-					<th scope="row">1</th>
-					<td>Make hypebot less spammy</td>
-					<td>Sep. 9</td>
+					<th scope="row" className="align-middle">1</th>
+					<td className="align-middle">Make hypebot less spammy</td>
+					<td className="align-middle">Sep. 9</td>
 					<td><CompletedButton/></td>
 					<td><ReassignedButton/></td>
 					<td><ExtendedButton/></td>
 					<td><DeleteButton/></td>
 				</tr>
 				<tr>
-					<th scope="row">2</th>
-					<td>Make a rough outline of the PM calendar</td>
-					<td>Sep. 9</td>
+					<th scope="row" className="align-middle">2</th>
+					<td className="align-middle">Make a rough outline of the PM calendar</td>
+					<td className="align-middle">Sep. 9</td>
 					<td><CompletedButton/></td>
 					<td><ReassignedButton/></td>
 					<td><ExtendedButton/></td>
 					<td><DeleteButton/></td>
 				</tr>
 				<tr>
-					<th scope="row">3</th>
-					<td>Change the points system excel sheet</td>
-					<td>Sep. 9</td>
+					<th scope="row" className="align-middle">3</th>
+					<td className="align-middle">Change the points system excel sheet</td>
+					<td className="align-middle">Sep. 9</td>
 					<td><CompletedButton/></td>
 					<td><ReassignedButton/></td>
 					<td><ExtendedButton/></td>
