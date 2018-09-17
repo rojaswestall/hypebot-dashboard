@@ -7,8 +7,3 @@ To run this app locally:
 yarn
 yarn start
 ```
-
-### Helpful Resources
-[Serverless Computing with AWS](https://aws.amazon.com/serverless/)
-
-
