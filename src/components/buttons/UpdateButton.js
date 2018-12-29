@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ReassignedButton extends Component {
+class UpdateButton extends Component {
 
 	constructor(props) {
 		super(props);
@@ -11,9 +11,9 @@ class ReassignedButton extends Component {
 
 	render() {
 		return (
-			<button type="button" className="btn btn-reassign">Reassign</button>
+			<button type="button" className="btn btn-reassign">Update</button>
 		);
 	}
 }
 
-export default ReassignedButton;
+export default UpdateButton;

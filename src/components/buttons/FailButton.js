@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CompletedButton extends Component {
+class FailButton extends Component {
 
 	constructor(props) {
 		super(props);
@@ -11,9 +11,9 @@ class CompletedButton extends Component {
 
 	render() {
 		return (
-			<button type="button" className="btn btn-complete">Completed</button>
+			<button type="button" className="btn btn-delete">Fail</button>
 		);
 	}
 }
 
-export default CompletedButton;
+export default FailButton;

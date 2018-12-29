@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
+import CompletedButton from './buttons/CompletedButton';
+import UpdateButton from './buttons/UpdateButton';
+import RemoveButton from './buttons/RemoveButton';
+import FailButton from './buttons/FailButton';
+import FailExtendButton from './buttons/FailExtendButton';
 
 class Task extends Component {
 
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return (
-			<span> Placeholder text </span>
-			// This component is going to be used to place each task into.
-			// Get the task and other info from the props and use it to set
-			// the data displayed for the task
-			
-			// <th scope="row">1</th>
-			// <td>Make hypebot less spammy</td>
-			// <td>Sep. 9</td>
-			// <td><CompletedButton/></td>
-			// <td><ReassignedButton/></td>
-			// <td><ExtendedButton/></td>
-			// <td><DeleteButton/></td>
+			<tr>
+				<th scope="row" className="align-middle">{this.props.index}</th>
+				<td className="align-middle">{this.props.description}</td>
+				<td className="align-middle">{this.props.dueDate}</td>
+				<td className="align-middle">{this.props.notes}</td>
+				<td><CompletedButton/></td>
+				<td><UpdateButton/></td>
+				<td><RemoveButton/></td>
+				<td><FailExtendButton/></td>
+				<td><FailButton/></td>
+			</tr>
 		);
 	}
 }

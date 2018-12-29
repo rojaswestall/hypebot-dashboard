@@ -1,83 +1,105 @@
 import React, { Fragment, Component } from 'react';
-import CompletedButton from './CompletedButton';
-import ReassignedButton from './ReassignedButton';
-import ExtendedButton from './ExtendedButton';
-import DeleteButton from './DeleteButton';
-import AddTask from './AddTask';
+import Task from './Task';
+import AddTask from './buttons/AddTask';
+
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 class KnightTable extends Component {
 
 	constructor(props) {
 		super(props);
 		this.displayTasks = this.displayTasks.bind(this);
-		this.sortByDate = this.sortByDate.bind(this);
+		this.getFormattedDate = this.getFormattedDate.bind(this);
+		this.displayStatus = this.displayStatus.bind(this);
 	}
 
-	sortByDate() {
-		// Use props to rearrange the data used to display the tasks by date
-		// When the header "Date" is clicked on
+	getFormattedDate(date) {
+		var dateArr = date.toLocaleDateString().split("/");
+		var mon = months[Number(dateArr[0]) - 1];
+		var day = dateArr[1];
+		var year = dateArr[2];
+		return "" + mon + " " + day + ", " + year;
 	}
 
 	displayTasks() {
-		// Need to map through all of the data that is passed to us through
-		// the props to display them. Use the <Task /> component
-		return (
-			<Fragment>
-				<tr>
-					<th scope="row" className="align-middle">1</th>
-					<td className="align-middle">Make hypebot less spammy</td>
-					<td className="align-middle">Sep. 9</td>
-					<td><CompletedButton/></td>
-					<td><ReassignedButton/></td>
-					<td><ExtendedButton/></td>
-					<td><DeleteButton/></td>
-				</tr>
-				<tr>
-					<th scope="row" className="align-middle">2</th>
-					<td className="align-middle">Make a rough outline of the PM calendar</td>
-					<td className="align-middle">Sep. 9</td>
-					<td><CompletedButton/></td>
-					<td><ReassignedButton/></td>
-					<td><ExtendedButton/></td>
-					<td><DeleteButton/></td>
-				</tr>
-				<tr>
-					<th scope="row" className="align-middle">3</th>
-					<td className="align-middle">Change the points system excel sheet</td>
-					<td className="align-middle">Sep. 9</td>
-					<td><CompletedButton/></td>
-					<td><ReassignedButton/></td>
-					<td><ExtendedButton/></td>
-					<td><DeleteButton/></td>
-				</tr>
-			</Fragment>
-		);
+
+		// Sort the tasks by due date
+		var tasks = this.props.brother.tasks;
+
+		return tasks.map((task, i) => {
+			var dueDate = new Date(Number(task.dueDate));
+			var originalDueDate = new Date(Number(task.originalDueDate));
+			return (
+				<Task
+					key={i}
+					index={i + 1}
+					id={this.props.brother.id} 
+					description={task.description} 
+					dueDate={this.getFormattedDate(dueDate)} 
+					originalDueDate={this.getFormattedDate(originalDueDate)} 
+					notes={task.notes} 
+					partners={task.partners} 
+				/>
+			);
+		});
 	}
 
-	// The extra columns are for Completed (Green), Reassigned (Blue), 
-	// Extended (Yellow), Delete (Red)
-	// Inside the body is where we can add another task, at the end 
+	displayStatus(status) {
+		if (status === "active") {
+			return (
+				<span className="active">
+					{status}
+				</span>
+			);
+		} else {
+			return (
+				<span className="inactive">
+					{status}
+				</span>
+			);
+		}
+	}
+
+	// Conditionally render so if there are no tasks for a bro we say something else
 	render() {
-		return (
-			<Fragment>
-				<div className="knight-name">
-					Marchitar
+		if (this.props.brother.tasks.length === 0) {
+			return (
+				<div className="knight-table">
+					<div className="knight-name">
+						Sir {this.props.brother.sirName} has no tasks 🙂
+					</div>
+					<div className="knight-email">
+						{this.props.brother.email}  |  {this.displayStatus(this.props.brother.status)}
+					</div>
+
 				</div>
-				<table className="table table-striped table-borderless">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Task</th>
-							<th scope="col">Due</th>
-						</tr>
-					</thead>
-					<tbody>
-						{this.displayTasks()}
-					</tbody>
-				</table>
-				<AddTask />
-			</Fragment>
-		);
+			);
+		} else {
+			return (
+				<div className="knight-table">
+					<div className="knight-name">
+						Sir {this.props.brother.sirName}
+					</div>
+					<div className="knight-email">
+						{this.props.brother.email}  |  {this.displayStatus(this.props.brother.status)}
+					</div>
+					<table className="table table-striped table-borderless">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Task</th>
+								<th scope="col">Due</th>
+								<th scope="col">Notes</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.displayTasks()}
+						</tbody>
+					</table>
+					<AddTask sirName={this.props.brother.sirName}/>
+				</div>
+			);
+		}
 	}
 }
 
